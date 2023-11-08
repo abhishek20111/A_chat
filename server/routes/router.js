@@ -30,7 +30,7 @@ router.post("/register", async (req, res) => {
             return res.json({ error: "User Exists" });
         }
         const response = await User.create({
-            name,
+            name, 
             email,
             password: encryptedPassword
         });
