@@ -12,15 +12,13 @@ const userMiniProjectSchema = new mongoose.Schema({
         unique: true,
         required: true,
     },
-    password: {
-        type: String,
-        required: true,
+    photo : String,
+    friend:{
+        type:[ObjectId],
+        ref:'User_Mini_Project',
+        default:[]
     },
-    role: {
-        type: String,
-        default:'User'
-    },
-    photo : String
+    gender:Boolean
 
 }, { timestamps: true })
 

@@ -3,27 +3,44 @@ import logo from '../assets/full_title.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { useAuth0 } from "@auth0/auth0-react";
-import { addEmail, addImage, addName, setIsLogin, updateId} from '../store/UserSlice';
+import { addEmail,addImage, addName, addfriend, setIsLogin, updateId} from '../store/UserSlice';
 import Alex from '../assets/alex.jpg'
+import { addUser } from '../service/api';
 
 export default function Navbar() {
     const [openOption, setOpenOption] = useState(false)
     const [openOptionMobile, setOpenOptionMobile] = useState(false)
     const { logout, isAuthenticated, user, loginWithRedirect } = useAuth0();
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const name = useSelector((state)=>state.userData.name)
     const image = useSelector((state)=>state.userData.image)
+
+    const fetchData = async () => {
+        try {
+            const data = { name: user.name, email: user.email, photo: user.picture };
+            const showData = await addUser(data)
+            .then((data)=> 
+                {
+                dispatch(setIsLogin(true));
+                dispatch(addName(data.name));
+                dispatch(addEmail(data.email));
+                dispatch(addImage(data.photo));
+                dispatch(updateId(data._id));
+                dispatch(addfriend(data.friend));
+                }
+            )
+        } catch (error) {
+            console.log('Error while calling addUser API ', error);
+        }
+    };
     
     useEffect(() => {
         if (isAuthenticated) {
-            dispatch(setIsLogin(true));
-            dispatch(addName(user.name))
-            dispatch(addEmail(user.email))
-            dispatch(addImage(user.picture))
-            dispatch(updateId(user.sub))
+            fetchData();
         }
     }, [isAuthenticated]);
+
+    
 
     return (
         <div>
@@ -86,7 +103,7 @@ export default function Navbar() {
                                 To: "transform opacity-0 scale-95"   --> */}
                                 {openOption && <div onClick={() => setOpenOption(false)} className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                                     {/* <!-- Active: "bg-gray-100", Not Active: "" --> */}
-                                    <Link to={'/myprofile'} className=" block px-4 py-2 text-sm text-gray-700">Your Profile</Link>
+                                    <Link to={'/profile'} className=" block px-4 py-2 text-sm text-gray-700">Your Profile</Link>
                                     <Link to={'/setting'} className=" block px-4 py-2 text-sm text-gray-700">Setting</Link>
                                     <button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })} className=" block px-4 py-2 text-sm text-gray-700">Sign Out</button>
                                 </div>}
