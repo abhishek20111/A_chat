@@ -5,7 +5,7 @@ const url = 'http://localhost:8080';
 export const addUser = async (data) => {
     try {
         let response = await axios.post(`${url}/addUser`, data);
-        console.log(data);
+        // console.log(data);
         return response.data;
     } catch (error) {
         console.log('Error while calling addUser API ', error);
@@ -49,3 +49,16 @@ export const getConversation = async (users) => {
         console.log('Error while calling getConversation API ', error);
     }
 }
+
+export const getProfile = async (id) => {
+    try {
+        const response = await axios.get(`${url}/getProfile/${id}`);
+        return response.data;
+    } catch (error) {
+        console.log('Error while calling getProfile API ', error);
+        throw error;  // Rethrow the error to handle it in the component if needed
+    }
+};
+
+
+

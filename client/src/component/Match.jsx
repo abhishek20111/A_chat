@@ -38,7 +38,7 @@ export default function Match() {
           {userData.map((user) => (
             user.email !== email && (
               <tr key={user._id}>
-                <td>{user.name}</td>
+                <td onClick={() => {navigate('/profile', { state: { friendsId: user._id} })}}>{user.name}</td>
                 <td>{user.email}</td>
                 <td>
                   <img src={user.photo} alt={user.name} style={{ width: '50px', height: '50px' }} />

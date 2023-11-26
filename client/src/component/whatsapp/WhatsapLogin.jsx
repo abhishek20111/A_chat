@@ -6,10 +6,12 @@ import logo from '../../assets/alex.jpg'
 import { useSelector } from 'react-redux';
 import Background from './Background';
 import background from '../../assets/background.jpeg'
+import { useNavigate } from 'react-router-dom';
 
 export default function WhatsapLogin() {
   const { isAuthenticated, isLoading } = useAuth0();
   const [userData, setUserData] = useState();
+  const navigate = useNavigate()
   const email = useSelector((state) => state.userData.email)
   const [showMessage, setShoeMessage] = useState(false)
 
@@ -51,7 +53,8 @@ export default function WhatsapLogin() {
                   <div key={data._id} className='flex gap-4 pt-3 ' onClick={(e)=>{setShoeMessage(true)}}>
                     <img className='h-[40px] w-[40px] object-fill rounded-full' src={data.photo} alt={logo} />
                     <p className='my-auto cursor-pointer'>{data.name}</p>
-                    <span class="material-symbols-outlined ml-auto cursor-pointer hover:text-black">more_vert</span>
+                    <span onClick={()=>navigate('/profile', { state: { friendsId: data._id } })}
+                    className="material-symbols-outlined ml-auto cursor-pointer hover:text-black">more_vert</span>
                   </div>
                 );
               }

@@ -3,7 +3,7 @@ import logo from '../assets/full_title.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { useAuth0 } from "@auth0/auth0-react";
-import { addEmail,addImage, addName, addfriend, setIsLogin, updateId} from '../store/UserSlice';
+import { addEmail,addImage, addName, addFriend, setIsLogin, updateId} from '../store/UserSlice';
 import Alex from '../assets/alex.jpg'
 import { addUser } from '../service/api';
 
@@ -26,7 +26,7 @@ export default function Navbar() {
                 dispatch(addEmail(data.email));
                 dispatch(addImage(data.photo));
                 dispatch(updateId(data._id));
-                dispatch(addfriend(data.friend));
+                dispatch(addFriend(data.friend));
                 }
             )
         } catch (error) {

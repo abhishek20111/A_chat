@@ -52,16 +52,19 @@ router.post('/addUser', async (req, res) => {
     }
 });
 
-router.get('/getProfile',async(req, res)=>{
+router.get('/getProfile/:id', async (req, res) => {
     console.log("getProfile");
-    try{
-        const id = req.body;
+    try {
+        const { id } = req.params;
         const user = await User.findById(id);
+        console.log(user);
         return res.status(200).json(user);
-    }catch(error){
-        console.log("Error from backend "+error);
+    } catch (error) {
+        console.log("Error from backend " + error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
-})
+});
+
 
 router.get('/users', async (req, res) => {
     console.log("get all user data");
@@ -97,8 +100,7 @@ router.post('/addFriend', async (req, res) => {
       await user.save();
       await friendUser.save();
   
-      res.status(200).json(user);
-    } catch (error) {
+      res.status(200).json({ message: `Chat with ${friendUser.name}` });    } catch (error) {
       console.error('Error while adding friend:', error);
       res.status(500).json({ error: 'Internal Server Error' });
     }

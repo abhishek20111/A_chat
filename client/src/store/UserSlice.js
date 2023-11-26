@@ -61,7 +61,7 @@ export const {
   addDetail,
   removeDetail,
   setIsLogin,
-  addfriend,
+  addFriend,
   resetState,
 } = userSlice.actions;
 
