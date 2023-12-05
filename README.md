@@ -26,13 +26,13 @@ These instructions are only for testing out the **Web** build. For the **Android
 Clone the project  
 
 ~~~bash  
-  git clone https://github.com/abhishek20111/A_chat.git
+  git clone https://github.com/abhishek20111/VChat.git
 ~~~
 
 Go to the project directory  
 
 ~~~bash  
-  cd A_Chat
+  cd VChat
 ~~~
 
 Got to the client directory
