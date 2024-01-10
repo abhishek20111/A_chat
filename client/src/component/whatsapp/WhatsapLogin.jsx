@@ -1,29 +1,53 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import Message from './Message';
-import { getUsers } from '../../service/api';
+import { getConversation, getProfile } from '../../service/api';
 import logo from '../../assets/alex.jpg'
 import { useSelector } from 'react-redux';
 import Background from './Background';
 import background from '../../assets/background.jpeg'
 import { useNavigate } from 'react-router-dom';
+import io from 'socket.io-client'
+import './Loader.css'
 
 export default function WhatsapLogin() {
   const { isAuthenticated, isLoading } = useAuth0();
   const [userData, setUserData] = useState();
   const navigate = useNavigate()
+  const socket = useRef();
   const email = useSelector((state) => state.userData.email)
   const [showMessage, setShoeMessage] = useState(false)
+  const userId = useSelector((state) => state.userData.id);
+  const [converstation, setConverstation] = useState({})
+
 
   const fetchData = async () => {
     try {
-      const getAllUser = await getUsers();
-      console.log(getAllUser);
+      const getAllUser = await getProfile(userId);
+      // console.log(getAllUser);
       setUserData(getAllUser);
     } catch (error) {
       console.log('Error while calling getUsers API ', error);
     }
   };
+
+  const getConverstation = async (e, id) => {
+    e.preventDefault()
+    const data = {
+      senderId: userId,
+      receiverId: id
+    }
+    await getConversation(data)
+      .then((data) => {
+        console.log(data);
+        setShoeMessage(true);
+        setConverstation(data)
+      })
+  }
+
+  useEffect(() => {
+    socket.current = io('ws://localhost:8080'); // for connection purpose 
+  }, [])
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -31,8 +55,15 @@ export default function WhatsapLogin() {
     }
   }, [isAuthenticated]);
 
+  useEffect(() => {
+    if (userData) {
+      socket.current.emit("addUser", userData);
+      
+    }
+  }, [userData]);
+
   if (isLoading) {
-    return <div>Loading ...</div>;
+    return <div><div class="loader"></div></div>;
   }
 
 
@@ -47,26 +78,21 @@ export default function WhatsapLogin() {
               <input type="text" className='w-full p-1' placeholder='Search..' />
             </div>
 
-            {userData && userData.map((data) => {
+            {userData && userData.friend && userData.friend.length > 0 && userData.friend.map((data) => {
               if (email !== data.email) {
                 return (
-                  <div key={data._id} className='flex gap-4 pt-3 ' onClick={(e)=>{setShoeMessage(true)}}>
+                  <div key={data._id} className='flex gap-4 pt-3 ' onClick={(e) => { setShoeMessage(true) }}>
+
                     <img className='h-[40px] w-[40px] object-fill rounded-full' src={data.photo} alt={logo} />
-                    <p className='my-auto cursor-pointer'>{data.name}</p>
-                    <span onClick={()=>navigate('/profile', { state: { friendsId: data._id } })}
-                    className="material-symbols-outlined ml-auto cursor-pointer hover:text-black">more_vert</span>
+                    <p onClick={(e) => getConverstation(e, data._id)} className='my-auto w-[100%] cursor-pointer'>{data.name}</p>
+                    <span onClick={() => navigate('/profile', { state: { friendsId: data._id } })}
+                      className="material-symbols-outlined ml-auto cursor-pointer hover:text-black">more_vert</span>
                   </div>
                 );
               }
               return null;
             })}
-
-            <div className='flex gap-4 pt-3'>
-              <img className='h-[40px] rounded-full' src="https://upload.wikimedia.org/wikipedia/commons/1/19/WhatsApp_logo-color-vertical.svg" alt="" />
-              <p className='my-auto'>Abhishek Dimpy</p>
-            </div>
           </div>
-
         </div>
 
         <div className='w-[67%]'>
@@ -75,7 +101,7 @@ export default function WhatsapLogin() {
             <div className='ml-5 gap-y-3'>
               {
                 showMessage ?
-                  <Message />
+                  <Message socket={socket} converstation={converstation.conversation} friend={converstation.friendData} />
                   :
                   <img src={background} className='rounded-lg opacity-60 sm:h-[86vh] object-cover '></img>
               }

@@ -5,33 +5,39 @@ import './whatsapp/static/css/fontawesome-all.css'
 import './whatsapp/static/css/styles.css'
 import './whatsapp/static/css/swiper.css'
 import './whatsapp/static/css/magnific-popup.css'
-// import './whatsapp/static/js/jquery.magnific-popup.js'
-// // import './whatsapp/static/js/scripts.js'
-// import './whatsapp/static/js/swiper.min.js'
-// import './whatsapp/static/js/jquery.easing.min.js'
-// import './whatsapp/static/js/jquery.min.js'
+import chatting from '../assets/chatting.gif'
+import mobile from '../assets/mobile.jpg'
+import playstore from '../assets/playstore.png'
 
 export default function Home() {
   return (
     <div>
 
-      <header id="header" className="header py-28 text-center md:pt-36 lg:text-left xl:pt-44 xl:pb-32">
+      <header id="header" className="header  text-center  lg:text-left xl:pt-12 xl:pb-32">
         <div className="container px-4 sm:px-8 lg:grid lg:grid-cols-2 lg:gap-x-8">
           <div className="mb-16 lg:mt-32 xl:mt-40 xl:mr-12">
             <h1 className="h1-large mb-5">Team management mobile application</h1>
             <p className="p-large mb-8">Start getting things done together with your team based on Pavo's revolutionary team management features</p>
-            <a href="https://play.google.com/store/games?hl=en&gl=US&pli=1" className="btn-solid-lg" ><i className="fab fa-apple"></i>Download</a>
-            <a className="btn-solid-lg secondary" href="#your-link"><i className="fab fa-google-play"></i>Download</a>
+            <a href="#_" className="relative inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all bg-purple-500 rounded-xl group">
+              <span className="absolute top-0 right-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-purple-700 rounded group-hover:-mr-4 group-hover:-mt-4">
+              
+                <span className="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
+              </span>
+              <img src={playstore} className='h-5 w-5 mr-2' alt="" />
+              <span className="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-200 -translate-x-full translate-y-full bg-purple-600 rounded-2xl group-hover:mb-12 group-hover:translate-x-0"></span>
+              <span className="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white">Download</span>
+            </a>
+            
           </div>
           <div className="xl:text-right">
-            <img className="inline" src="./whatsapp/static/images/header-smartphone.png" alt="alternative" />
+            <img className="inline rounded-xl border-[#fee6fb] border-4 ring-1 ring-[#fee6fb] ring-offset-4" src={chatting} alt="alternative" />
           </div>
         </div>
       </header>
       <div className="pt-4 pb-14 text-center">
         <div className="container px-4 sm:px-8 xl:px-4">
           <p className="mb-4 text-gray-800 text-3xl leading-10 lg:max-w-5xl lg:mx-auto"> Team management mobile apps don’t get better than Pavo. It’s probably the best app in the world for this purpose. Don’t hesitate to give it a try today and you will fall in love with it</p>
-        </div> 
+        </div>
       </div>
       <div id="features" className="cards-1">
         <div className="container px-4 sm:px-8 xl:px-4">
@@ -92,25 +98,25 @@ export default function Home() {
             </div>
           </div>
 
-        </div> 
-      </div> 
+        </div>
+      </div>
 
 
-    
+
       <div id="details" className="pt-12 pb-16 lg:pt-16">
         <div className="container px-4 sm:px-8 lg:grid lg:grid-cols-12 lg:gap-x-12">
           <div className="lg:col-span-5">
-            <div className="mb-16 lg:mb-0 xl:mt-16">
+            <div className="mb-16 lg:mb-0 xl:mt-16 pt-44">
               <h2 className="mb-6">Results driven ground breaking technology</h2>
               <p className="mb-4">Based on our team's extensive experience in developing line of business applications and constructive customer feedback we reached a new level of revenue.</p>
               <p className="mb-4">We enjoy helping small and medium sized tech businesses take a shot at established Fortune 500 companies</p>
             </div>
-          </div> 
+          </div>
           <div className="lg:col-span-7">
             <div className="xl:ml-14">
-              <img className="inline" src="./whatsapp/static/images/details-1.jpg" alt="alternative" />
+              <img className="inline" src={mobile} alt="alternative" />
             </div>
-          </div> 
+          </div>
         </div>
       </div>
       <div className="py-24">
@@ -140,8 +146,8 @@ export default function Home() {
               <a className="btn-solid-reg popup-with-move-anim mr-1.5" href="#details-lightbox">Lightbox</a>
               <a className="btn-outline-reg" href="article.html">Details</a>
             </div>
-          </div> 
-        </div> 
+          </div>
+        </div>
       </div>
       <div id="details-lightbox" className="lightbox-basic zoom-anim-dialog mfp-hide">
         <div className="lg:grid lg:grid-cols-12 lg:gap-x-8">
@@ -150,7 +156,7 @@ export default function Home() {
             <div className="mb-12 text-center lg:mb-0 lg:text-left xl:mr-6">
               <img className="inline rounded-lg" src="./whatsapp/static/images/details-lightbox.jpg" alt="alternative" />
             </div>
-          </div> 
+          </div>
           <div className="lg:col-span-4">
             <h3 className="mb-2">Goals Setting</h3>
             <hr className="w-11 h-0.5 mt-0.5 mb-4 ml-0 border-none bg-indigo-600" />
@@ -181,8 +187,8 @@ export default function Home() {
             </ul>
             <a className="btn-solid-reg mfp-close page-scroll" href="#download">Download</a>
             <button className="btn-outline-reg mfp-close as-button" type="button">Back</button>
-          </div> 
-        </div> 
+          </div>
+        </div>
       </div>
       <div className="pt-16 pb-12">
         <div className="container px-4 sm:px-8 lg:grid lg:grid-cols-12 lg:gap-x-12">
@@ -198,16 +204,16 @@ export default function Home() {
             <div className="ml-14">
               <img className="inline" src="./whatsapp/static/images/details-3.jpg" alt="alternative" />
             </div>
-          </div> 
-        </div> 
+          </div>
+        </div>
       </div>
 
 
-      
+
       <div className="counter">
         <div className="container px-4 sm:px-8">
 
-         
+
           <div id="counter">
             <div className="cell">
               <div className="counter-value number-count" data-count="231">1</div>
@@ -231,18 +237,18 @@ export default function Home() {
             </div>
           </div>
 
-        </div> 
-      </div> 
+        </div>
+      </div>
       <div className="slider-1 py-32 bg-gray">
         <div className="container px-4 sm:px-8">
           <h2 className="mb-12 text-center lg:max-w-xl lg:mx-auto">What do users think about Pavo</h2>
 
-     
+
           <div className="slider-container">
             <div className="swiper-container card-slider">
               <div className="swiper-wrapper">
 
-               
+
                 <div className="swiper-slide">
                   <div className="card">
                     <img className="card-image" src="./whatsapp/static/images/testimonial-1.jpg" alt="alternative" />
@@ -251,7 +257,7 @@ export default function Home() {
                       <p className="testimonial-author">Jude Thorn - Designer</p>
                     </div>
                   </div>
-                </div> 
+                </div>
                 <div className="swiper-slide">
                   <div className="card">
                     <img className="card-image" src="./whatsapp/static/images/testimonial-2.jpg" alt="alternative" />
@@ -260,7 +266,7 @@ export default function Home() {
                       <p className="testimonial-author">Roy Smith - Developer</p>
                     </div>
                   </div>
-                </div> 
+                </div>
                 <div className="swiper-slide">
                   <div className="card">
                     <img className="card-image" src="./whatsapp/static/images/testimonial-3.jpg" alt="alternative" />
@@ -269,7 +275,7 @@ export default function Home() {
                       <p className="testimonial-author">Marsha Singer - Marketer</p>
                     </div>
                   </div>
-                </div> 
+                </div>
                 <div className="swiper-slide">
                   <div className="card">
                     <img className="card-image" src="./whatsapp/static/images/testimonial-4.jpg" alt="alternative" />
@@ -278,7 +284,7 @@ export default function Home() {
                       <p className="testimonial-author">Tim Shaw - Designer</p>
                     </div>
                   </div>
-                </div> 
+                </div>
                 <div className="swiper-slide">
                   <div className="card">
                     <img className="card-image" src="./whatsapp/static/images/testimonial-5.jpg" alt="alternative" />
@@ -296,28 +302,28 @@ export default function Home() {
                       <p className="testimonial-author">Ann Blake - Developer</p>
                     </div>
                   </div>
-                </div> 
+                </div>
 
-              </div> 
+              </div>
 
               <div className="swiper-button-next"></div>
               <div className="swiper-button-prev"></div>
-          
+
 
             </div>
-          </div> 
-          
+          </div>
 
-        </div> 
+
+        </div>
       </div>
-    
+
       <div id="pricing" className="cards-2">
         <div className="absolute bottom-0 h-40 w-full bg-white"></div>
         <div className="container px-4 pb-px sm:px-8">
           <h2 className="mb-2.5 text-white lg:max-w-xl lg:mx-auto">Pricing options for all budgets</h2>
           <p className="mb-16 text-white lg:max-w-3xl lg:mx-auto"> Our pricing plans are setup in such a way that any user can start enjoying Pavo without worrying so much about costs. They are flexible and work for any type of industry </p>
 
-          
+
           <div className="card">
             <div className="card-body">
               <div className="card-title">STANDARD</div>
@@ -346,8 +352,8 @@ export default function Home() {
                 <a className="btn-solid-reg page-scroll" href="#download">Download</a>
               </div>
             </div>
-          </div> 
-          
+          </div>
+
           <div className="card">
             <div className="card-body">
               <div className="card-title">ADVANCED</div>
@@ -376,8 +382,8 @@ export default function Home() {
                 <a className="btn-solid-reg page-scroll" href="#download">Download</a>
               </div>
             </div>
-          </div> 
-          
+          </div>
+
           <div className="card">
             <div className="card-body">
               <div className="card-title">COMPLETE</div>
@@ -406,10 +412,10 @@ export default function Home() {
                 <a className="btn-solid-reg page-scroll" href="#download">Download</a>
               </div>
             </div>
-          </div> 
-          
-              </div> 
-                    </div> 
+          </div>
+
+        </div>
+      </div>
 
       <div id="download" className="basic-5">
         <div className="container px-4 sm:px-8 lg:grid lg:grid-cols-2">
@@ -422,8 +428,8 @@ export default function Home() {
             <a className="btn-solid-lg secondary" href="#your-link"><i className="fab fa-google-play"></i>Download</a>
           </div>
         </div>
-      </div> 
-    
+      </div>
+
     </div>
   )
 }

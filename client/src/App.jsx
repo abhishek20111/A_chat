@@ -10,6 +10,7 @@ import Match from './component/Match';
 import WhatsapLogin from './component/whatsapp/WhatsapLogin';
 import Setting from './component/Setting';
 import Profile from './component/Profile';
+import { ToastContainer } from 'react-toastify';
 
 export default function App() {
 
@@ -30,6 +31,7 @@ export default function App() {
     <>
       <Navbar />
       <AppRouters />
+      <ToastContainer/>
     </>
   );
 

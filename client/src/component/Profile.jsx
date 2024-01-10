@@ -3,6 +3,7 @@ import { addFriend, getProfile, setConversation } from '../service/api';
 import { useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import '../App.css'
 
 export default function Profile() {
     const [userData, setUserData] = useState(null);
@@ -34,7 +35,7 @@ export default function Profile() {
 
     const handleAddFriend = async (e, Fri_ID) => {
         e.preventDefault();
-        const data = { userEmail: userId, friendId: Fri_ID };
+        const data = { senderId: userId, receiverId: Fri_ID };
 
         try {
             await addFriend(email, Fri_ID);
@@ -54,7 +55,7 @@ export default function Profile() {
     return (
         <div className="h-screen dark:bg-purple-400 bg-gray-200 pt-12">
         {loading ? (
-            <h1>Loading...</h1>
+            <div class="loader"></div>
         ) : (
             <div class="max-w-sm mx-auto bg-white dark:bg-gray-900 rounded-lg overflow-hidden shadow-lg">
                 <div class="border-b px-4 pb-6">

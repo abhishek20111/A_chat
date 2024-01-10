@@ -129,7 +129,7 @@ h6 {
 
 .btn-solid-lg {
     display: inline-block;
-    padding: 1.625rem 2.75rem 1.625rem 2.75rem;
+    padding: 1.625rem 1.75rem 1.625rem 1.75rem;
     border: 1px solid #594cda;
     border-radius: 32px;
     background-color: #594cda;
@@ -140,7 +140,7 @@ h6 {
     text-decoration: none;
     transition: all 0.2s;
     margin-right: 0.25rem;
-    margin-bottom: 1.25rem;
+    /* margin-bottom: 1.25rem; */
     margin-left: 0.25rem;
 }
 
@@ -573,7 +573,7 @@ input[type="checkbox"] {
 /*    Header     */
 /*****************/
 .header {
-    background: linear-gradient(rgba(197, 234, 249, 1), rgba(255, 255, 255, 1));
+    background: linear-gradient(to right, rgba(197, 234, 249, 1), rgba(254, 230, 251, 1));
 }
 
 /********************/

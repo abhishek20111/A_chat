@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 require('./model/User');
+require('./model/Conversation');
+require('./model/Message');
 const router = require('./routes/router');
 const dotenv = require('dotenv');
 const path = require('path');
@@ -35,7 +37,7 @@ app.use('/', router);
 // app.get("*", (req, res) => {
 //     res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
 // });
-
+ 
 const server = app.listen(port, () => {
   console.log(`Server is running on port - ${port}`);
 });
