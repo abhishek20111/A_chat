@@ -3,78 +3,72 @@ const { Server } = require("socket.io");
 let io;
 const users = [];
 
-function setupSocket(server) {
-    io = new Server(server, {
-        cors: {
-            origin: "*", // Adjust the origin as needed
-        },
-    });
-
-    io.on("connection", (socket) => {
-        //when ceonnect
-        // console.log( "a user connected.");
-        //take userId and socketId from user
-        socket.on("addUser", (userId) => {
-            // console.log("userId-- "+userId, socket.id);
-            addUser(userId, socket.id);
-            console.log(users);
-            io.emit("getUsers", users); 
-        });
-        
-     
-        //send and get message
-        socket.on("sendMessage", ({ senderId, receiverId, text }) => {
-            sendMessageToUser({ senderId, receiverId, text });
-        });
-        
-    
-        //when disconnect 
-        socket.on("disconnect", () => {
-            // console.log("a user disconnected!");
-            removeUser(socket.id);
-            io.emit("getUsers", users);
-        });
-    });
-}
-
 const addUser = (userId, socketId) => {
     !users.some((user) => user.userId === userId) &&
         users.push({ userId, socketId });
 };
 
 const removeUser = (socketId) => {
-    users = users.filter((user) => user.socketId !== socketId);
+    console.log(users);
+    console.log(socketId);
+    const index = users.findIndex((user) => user.socketId === socketId);
+
+    if (index !== -1) {
+        users.splice(index, 1);
+    }
 };
 
 const getUser = (userId) => {
-    return users.find((user) => user.userId === userId);
+    const matchingUsers = users.filter(user => user.userId === userId);
+    return matchingUsers.length > 0 ? matchingUsers[0].socketId : null;
 };
 
 const sendMessageToUser = async ({ senderId, receiverId, text }) => {
-    const user = getUser(receiverId);
-
-    if (user) {
-        io.to(user.socketId).emit("getMessage", {
+    const SocketIdUser = getUser(receiverId);
+    // console.log("User - " + SocketIdUser);
+    if (SocketIdUser) {
+        // console.log(text);
+        io.to(SocketIdUser).emit("getMessage", {
             senderId,
             text,
         });
     } else {
-        await new Promise((resolve) => {
-            io.once("connection", (socket) => {
-                if (socket.id === receiverId) {
-                    resolve(socket);
-                }
-            });
+        console.log("User not found for receiverId: " + receiverId);
+    }
+};
+
+function setupSocket(server) {
+    io = new Server(server, {
+        cors: {
+            origin: "*",
+        },
+    });
+
+    io.on("connection", (socket) => {
+        // when connect
+        console.log("a user connected.");
+
+        // take userId and socketId from user
+        socket.on("addUser", (userId) => {
+            console.log("userId-- " + userId._id, socket.id);
+            addUser(userId._id, socket.id);
+            console.log(users);
+            io.emit("getUsers", users);
         });
 
-        const onlineUser = getUser(receiverId);
-        if (onlineUser) {
-            io.to(onlineUser.socketId).emit("getMessage", {
-                senderId,
-                text,
-            });
-        }
-    }
+        // send and get message
+        socket.on("sendMessage", ({ senderId, receiverId, text }) => {
+            sendMessageToUser({ senderId, receiverId, text });
+        });
+
+        // when disconnect
+        socket.on("disconnect", () => {
+            console.log("a user disconnected!");
+            removeUser(socket.id);
+            console.log(users);
+            io.emit("getUsers", users);
+        });
+    });
 }
 
 module.exports = setupSocket;
