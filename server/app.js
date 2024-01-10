@@ -33,10 +33,10 @@ mongoose.connect(`mongodb+srv://project:LrmePKBVp0ilFNoY@cluster0.cw3zhzn.mongod
 app.use('/', router);
 
 // Serve the frontend (if needed)
-// app.use(express.static(path.join(__dirname, 'client', 'dist')));
-// app.get("*", (req, res) => {
-//     res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
-// });
+app.use(express.static(path.join(__dirname, 'dist')));
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
  
 const server = app.listen(port, () => {
   console.log(`Server is running on port - ${port}`);
