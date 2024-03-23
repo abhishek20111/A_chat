@@ -15,7 +15,7 @@ const removeUser = (socketId) => {
 
     if (index !== -1) {
         users.splice(index, 1);
-    }
+    } 
 };
 
 const getUser = (userId) => {
@@ -50,16 +50,16 @@ function setupSocket(server) {
 
         // take userId and socketId from user
         socket.on("addUser", (userId) => {
-            console.log("userId-- " + userId._id, socket.id);
+            // console.log("userId-- " + userId._id, socket.id);
             addUser(userId._id, socket.id);
             console.log(users);
             io.emit("getUsers", users);
-        });
-
+        }); 
+ 
         // send and get message
         socket.on("sendMessage", ({ senderId, receiverId, text }) => {
             sendMessageToUser({ senderId, receiverId, text });
-        });
+        }); 
 
         // when disconnect
         socket.on("disconnect", () => {

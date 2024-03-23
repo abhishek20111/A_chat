@@ -18,20 +18,20 @@ app.use(cors({ credentials: true }));
 
 const http = require('http');
 const { Server } = require("socket.io");
-
+ 
 const port = process.env.PORT || 8080;
 
 // Update the MongoDB connection with the new URL and options
 mongoose.connect(`mongodb+srv://project:LrmePKBVp0ilFNoY@cluster0.cw3zhzn.mongodb.net/?retryWrites=true&w=majority`)
-  .then(() => {
-    console.log("Successfully connected to MongoDB");
-  })
-  .catch(err => {
-    console.error("Connection error", err.message);
-  });
+.then(() => {
+  console.log("Successfully connected to MongoDB");
+})
+.catch(err => { 
+  console.error("Connection error", err.message); 
+}); 
 
 app.use('/', router);
-
+ 
 // Serve the frontend (if needed)
 app.use(express.static(path.join(__dirname, 'dist')));
 app.get("*", (req, res) => {
